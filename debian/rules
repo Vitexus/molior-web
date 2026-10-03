@@ -1,7 +1,8 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
 
 include /usr/share/dpkg/pkg-info.mk
+
+export NODE_OPTIONS=--openssl-legacy-provider
 
 %:
 	dh $@
@@ -13,4 +14,7 @@ override_dh_auto_build:
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -rf dist
+	rm -f src/app/lib/version.ts
 
+override_dh_auto_test:
+	# No packaged browser test runner
